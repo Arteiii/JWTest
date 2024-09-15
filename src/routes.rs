@@ -79,7 +79,8 @@ async fn refresh_token(
     }
 
     let new_access_token = generate_refresh_token(&db, user_id).await;
-    let new_session_token = generate_session_token(state.jwt_secret.lock().await.as_str(), user_id);
+    let new_session_token =
+        generate_session_token(state.jwt_secret.clone().as_ref().as_ref(), user_id);
 
     (
         StatusCode::OK,

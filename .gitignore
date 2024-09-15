@@ -12,3 +12,4 @@ Cargo.lock
 .idea/
 
 sqlite.db
+/build_timestamp.txt

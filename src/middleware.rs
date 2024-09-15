@@ -25,7 +25,8 @@ pub(crate) async fn auth_middleware(
     match token {
         Some(token) => {
             let validation = Validation::default();
-            let key = DecodingKey::from_secret(state.jwt_secret.lock().await.as_bytes());
+            let key =
+                DecodingKey::from_secret(&state.jwt_secret_bytes().await);
             match decode::<Claims>(token, &key, &validation) {
                 Ok(_) => {
                     // valid token continue to handler
